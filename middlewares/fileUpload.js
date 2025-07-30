@@ -43,7 +43,7 @@ const fileUpload = (req, res, next) => {
 
         // Log successful upload
         if (req.files) {
-            console.log('Files uploaded successfully:', req.files.length);
+            // console.log('Files uploaded successfully:', req.files.length);
         }
 
         next();

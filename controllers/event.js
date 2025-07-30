@@ -51,7 +51,7 @@ exports.events = async (req, res) => {
         }
         res.status(200).json({ success: true, events: events });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 };
@@ -107,7 +107,7 @@ exports.newEvent = async (req, res) => {
             });
         }
         let uploadedImages = [];
-        console.log(req.files);
+        // console.log(req.files);
         // Handle uploaded images
 
 
@@ -117,9 +117,9 @@ exports.newEvent = async (req, res) => {
                 filename: file.filename
             }));
         }
-        console.log('----------------------------');
-        console.log(uploadedImages)
-        console.log('---------------------------');
+        // console.log('----------------------------');
+        // console.log(uploadedImages)
+        // console.log('---------------------------');
 
         const newEvent = new Event({
             title: eventData.title,

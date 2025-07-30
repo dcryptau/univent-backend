@@ -21,15 +21,15 @@ async function sendVerificationOTP(email, otp) {
         const mailResponse = await mailSender(email,
 			"Verification Email",
 			otp)
-        console.log("Email sent Successfully: ", mailResponse.response);
+        // console.log("Email sent Successfully: ", mailResponse.response);
     } catch (error) {
-        console.log("error occured while sending mails: ", error);
+        // console.log("error occured while sending mails: ", error);
         throw error;
     }
 }
 
 OTPSchema.pre("save", async function (next) {
-    console.log("Mail in pre hook", this.email)
+    // console.log("Mail in pre hook", this.email)
     await sendVerificationOTP(this.email, this.otp);
     next();
 }) 

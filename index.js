@@ -30,7 +30,7 @@ cloudinary.v2.config({
 // Connect to MongoDB
 
 mongoose.connect(process.env.DB_URL)
-    .then(() => console.log('Connected to MongoDB'))
+    // .then(() => // console.log('Connected to MongoDB'))
     .catch(err => console.error('Connection error:', err));
 
 // Middleware
@@ -47,6 +47,24 @@ app.use((req, res, next) => {
     next();
 });
 
+// const allowedOrigins = [
+//   'http://localhost:5173',                     // Dev frontend
+//   'http://localhost:4173',                     // Dev build frontend
+//     'https://univent-g6t5.onrender.com'     // Render frontend
+// ];
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (like Postman)
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     } else {
+//       return callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true, // if using cookies or auth headers
+// }));
 
 // Routes
 app.use('/', userRoute);
@@ -56,5 +74,5 @@ app.use('/', eventRoute);
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    // console.log(`Server listening on port ${PORT}`);
 });

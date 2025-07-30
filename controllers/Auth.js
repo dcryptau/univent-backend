@@ -39,7 +39,7 @@ exports.sendOtp = async (req, res) => {
             });
             result = OTP.findOne({ otp: otp });
         }
-        console.log("OTP generated", otp);
+        // console.log("OTP generated", otp);
 
         const createdOtp = OTP({
             email,
@@ -53,7 +53,7 @@ exports.sendOtp = async (req, res) => {
             createdOtp
         })
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({
             success: false,
             message: error.message,
@@ -191,10 +191,10 @@ exports.changePassword = async (req, res) => {
         try {
             const emailResponse = await mailSender(user.email, 'Password Changed', `PASSWORD CHANGE CONFIRMATION`
             );
-            console.log(emailResponse);
+            // console.log(emailResponse);
 
         } catch (error) {
-            console.log("Error occured while sending email :", error)
+            // console.log("Error occured while sending email :", error)
             return res.status(500).json({
                 success: false,
                 message: 'Error occured while sending email',
@@ -207,7 +207,7 @@ exports.changePassword = async (req, res) => {
             message: 'Password changed successfully',
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({
             success: false,
             message: 'Error changing password',
@@ -229,7 +229,7 @@ const Token = require('../models/Token')
 exports.resetPasswordRequest = async (req, res) => {
     try {
         const { email } = req.body;
-        console.log(email);
+        // console.log(email);
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({
@@ -238,7 +238,7 @@ exports.resetPasswordRequest = async (req, res) => {
             });
         }
         const token = Math.random().toString(36).substring(2);
-        console.log(token);
+        // console.log(token);
         const tokenRecord = new Token({
             user: user._id,
             token
@@ -255,7 +255,7 @@ exports.resetPasswordRequest = async (req, res) => {
         })
     }
     catch (err) {
-        console.log('Error requesting password reset:', err);
+        // console.log('Error requesting password reset:', err);
         res.status(500).json({ success: false, message: 'Internal server error.' });
     }
 }
@@ -263,7 +263,7 @@ exports.resetPasswordRequest = async (req, res) => {
 exports.resetPassword = async (req, res) => {
     try {
         const { token, newPassword, confirmNewPassword } = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         if (newPassword !== confirmNewPassword) {
             return res.status(400).json({
@@ -296,10 +296,10 @@ exports.resetPassword = async (req, res) => {
             await Token.findByIdAndDelete(tokenRecord._id);
             try {
                 const emailResponse = await mailSender(user.email, 'Password Reset Confirmation', 'Your password has been successfully reset. If you did not request this change, please contact us immediately.');
-                console.log(emailResponse);
+                // console.log(emailResponse);
 
             } catch (error) {
-                console.log("Error occured while sending email :", error)
+                // console.log("Error occured while sending email :", error)
                 return res.status(500).json({
                     success: false,
                     message: 'Error occured while sending email',

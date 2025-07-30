@@ -12,7 +12,7 @@ exports.getUserProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        console.log(user);
+        // console.log(user);
 
         res.json(user);
     } catch (error) {
@@ -29,10 +29,10 @@ exports.userDetails = async (req, res) => {
                 message: 'Unauthorized',
             });
         }
-        console.log(req.body);
+        // console.log(req.body);
         const userDetails = new UserDetail(req.body);
         await userDetails.save();
-        console.log(userDetails);
+        // console.log(userDetails);
         const userId = req.user._id;
         await User.findByIdAndUpdate(userId, { userDetails: userDetails._id });
 
@@ -43,7 +43,7 @@ exports.userDetails = async (req, res) => {
             userDetails: userDetails
         });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error'
@@ -60,13 +60,13 @@ exports.campusDetails = async (req, res) => {
         }
 
         const campusDetails = new CampusDetail(req.body);
-        console.log(req.body);
-        console.log(campusDetails._id);
+        // console.log(req.body);
+        // console.log(campusDetails._id);
 
         await campusDetails.save();
 
         const campusId = req.user._id;
-        console.log(campusDetails);
+        // console.log(campusDetails);
 
         await User.findByIdAndUpdate(campusId, { campusDetails: campusDetails._id });
 
@@ -78,7 +78,7 @@ exports.campusDetails = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error'
